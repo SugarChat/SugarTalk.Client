@@ -1,9 +1,9 @@
 {
-  "name": "jitsi-meet-electron",
+  "name": "sugar-talk-electron",
   "version": "2.8.11",
-  "description": "Electron application for Jitsi Meet",
+  "description": "Electron application for Sugat Talk",
   "main": "./build/main.js",
-  "productName": "Jitsi Meet",
+  "productName": "Sugat Talk",
   "scripts": {
     "start": "webpack --config ./webpack.main.js --mode development && concurrently \"npm:watch\" \"electron ./build/main.js\"",
     "clean": "rm -rf node_modules build dist",
@@ -17,8 +17,8 @@
     "node": ">=12.0.0"
   },
   "build": {
-    "appId": "org.jitsi.jitsi-meet",
-    "productName": "Jitsi Meet",
+    "appId": "org.sugar-talk",
+    "productName": "Sugar Talk",
     "generateUpdatesFilesForAllChannels": true,
     "afterPack": "./linux-sandbox-fix.js",
     "files": [
@@ -28,7 +28,7 @@
       "!main.js"
     ],
     "mac": {
-      "artifactName": "jitsi-meet.${ext}",
+      "artifactName": "sugar-talk.${ext}",
       "target": [
         {
           "arch": "universal",
@@ -46,8 +46,8 @@
       "entitlementsInherit": "entitlements.mac.plist",
       "asarUnpack": "**/*.node",
       "extendInfo": {
-        "NSCameraUsageDescription": "Jitsi Meet requires access to your camera in order to make video-calls.",
-        "NSMicrophoneUsageDescription": "Jitsi Meet requires access to your microphone in order to make calls (audio/video).",
+        "NSCameraUsageDescription": "Sugar Talk requires access to your camera in order to make video-calls.",
+        "NSMicrophoneUsageDescription": "Sugar Talk requires access to your microphone in order to make calls (audio/video).",
         "LSMultipleInstancesProhibited": true
       }
     },
@@ -57,10 +57,10 @@
       "hardenedRuntime": false
     },
     "linux": {
-      "artifactName": "jitsi-meet-${arch}.${ext}",
+      "artifactName": "sugar-talk-${arch}.${ext}",
       "category": "VideoConference;AudioVideo;Audio;Video;Network",
-      "description": "Jitsi Meet Desktop App",
-      "executableName": "jitsi-meet",
+      "description": "Sugar Talk Desktop App",
+      "executableName": "sugar-talk",
       "target": [
         {
           "arch": "x64",
@@ -83,7 +83,7 @@
       ]
     },
     "win": {
-      "artifactName": "jitsi-meet.${ext}",
+      "artifactName": "sugar-talk.${ext}",
       "target": [
         {
           "arch": [
@@ -99,10 +99,10 @@
     },
     "protocols": [
       {
-        "name": "jitsi-protocol",
+        "name": "sugat-talk-protocol",
         "role": "Viewer",
         "schemes": [
-          "jitsi-meet"
+          "sugar-talk"
         ]
       }
     ]
@@ -119,9 +119,9 @@
     "webrtc",
     "xmpp",
     "electron",
-    "jitsi-meet"
+    "sugar-talk"
   ],
-  "author": "Jitsi Team <support@jitsi.org>",
+  "author": "Sugar Talk Team",
   "readmeFilename": "README.md",
   "license": "Apache-2.0",
   "dependencies": {
