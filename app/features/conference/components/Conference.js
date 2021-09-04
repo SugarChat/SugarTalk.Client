@@ -12,7 +12,7 @@ import config from '../../config';
 import { getSetting, setEmail, setName } from '../../settings';
 
 import { conferenceEnded, conferenceJoined } from '../actions';
-import JitsiMeetExternalAPI from '../external_api';
+import JitsiMeetExternalAPI from '../../external/external_api';
 import { LoadingIndicator, Wrapper } from '../styled';
 
 const ENABLE_REMOTE_CONTROL = false;
