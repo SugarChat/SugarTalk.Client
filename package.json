@@ -125,10 +125,12 @@
   "readmeFilename": "README.md",
   "license": "Apache-2.0",
   "dependencies": {
+    "axios": "0.21.1",
     "clipboard-copy": "^4.0.1",
     "electron-debug": "^3.2.0",
     "electron-reload": "^1.5.0",
     "jitsi-meet-electron-utils": "github:jitsi/jitsi-meet-electron-utils#v2.0.22",
+    "react-router-dom": "^5.3.0",
     "unorm": "^1.6.0"
   },
   "devDependencies": {
@@ -180,8 +182,8 @@
     "moment": "^2.29.1",
     "mousetrap": "^1.6.5",
     "patch-package": "6.2.2",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
     "react-i18next": "^11.8.12",
     "react-redux": "^5.1.2",
     "react-router-redux": "^5.0.0-alpha.9",
