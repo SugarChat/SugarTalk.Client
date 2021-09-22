@@ -1,4 +1,3 @@
-
 export default {
     /**
      * The URL with extra information about the app / service.
@@ -45,8 +44,4 @@ export default {
      * The URL of Terms and Conditions Page.
      */
     termsAndConditionsURL: 'https://jitsi.org/meet/terms',
-
-    'googleClientId': '542556032036-kch832eb37jpm8s9aafjf043jl25gjj7.apps.googleusercontent.com',
-    'facebookClientId': '462234011175255',
-    'weChatClientId': ''
 };

@@ -1,9 +1,10 @@
-import * as electron from 'electron';
 import Url from 'url';
 import { getGoogleToken } from "../../features/api/modules/login"
+import Env from "../config/env"
+// import * as electron from 'electron';
 
 const getBrowserWindowInstance = () => {
-    return new electron.remote.BrowserWindow({
+     return new electron.remote.BrowserWindow({
       show: true,
       width: 375,
       height: 668,
@@ -20,7 +21,7 @@ const getBrowserWindowInstance = () => {
 export const googleAuthenticated = () => {
     return new Promise((resolve, reject) => {
       const authWindow = getBrowserWindowInstance();
-  
+
       authWindow.webContents.userAgent =
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0';
   
@@ -37,6 +38,14 @@ export const googleAuthenticated = () => {
           redirectUri
         )}&include_granted_scopes=true&flowName=GeneralOAuthFlow`
       );
+
+      // let url =  `https://accounts.google.com/o/oauth2/v2/auth?client_id=${Env.googleClientId}&response_type=code&scope=${scope}&redirect_uri=${encodeURIComponent(
+      //     redirectUri
+      //   )}&include_granted_scopes=true&flowName=GeneralOAuthFlow`
+      // ;
+
+      // window.location.href = url
+
   
       authWindow.webContents.on('did-redirect-navigation', (_event, newUrl) => {
         if (newUrl.includes(redirectUri)) {
@@ -60,6 +69,7 @@ export const googleAuthenticated = () => {
         } finally {
         }
       };
+
       authWindow.on('close', () => {
       });
     });

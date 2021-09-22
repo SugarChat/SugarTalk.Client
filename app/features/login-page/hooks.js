@@ -1,12 +1,8 @@
-import {} from "./login-service"
+import { googleAuthenticated } from "./login-service"
 
 export const useLoginLogic = () => {
-
     const onHandleError = () => {
-        enqueueSnackbar('Login fail', {
-          variant: 'error',
-          autoHideDuration: 6000,
-        });
+        console.log('Login fail');
       };
 
     const loginPlatformList = [
@@ -33,8 +29,9 @@ export const useLoginLogic = () => {
                 case "Google":
                     await googleAuthenticated().then(({idToken}) =>{
                         onSuccess()
-                    }).catch(() => {
-                        onHandleError()
+                    }).catch((error) => {
+                        console.log(error);
+                        // onHandleError()
                     })
                     break
                 case 'Wechat': 
@@ -43,7 +40,7 @@ export const useLoginLogic = () => {
                     break
             }
         } catch (error) {
-            
+            console.log(error);
         }
     }
 

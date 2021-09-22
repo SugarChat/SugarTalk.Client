@@ -12,7 +12,7 @@ import { Logo,
     LoginBtnWrapper } from './style';
 import { useLoginLogic } from './hooks';
 
-const { loginPlatformList } = useLoginLogic();
+const { loginPlatformList, onLogin } = useLoginLogic();
 
 const LogInRow = () =>
     (<LoginRowWrapper >
@@ -20,10 +20,10 @@ const LogInRow = () =>
             (<LoginBtnWrapper key = { item.loginType }>
                 <LoginBtn
                     backgroundImage = { item.imageSrc } 
-                    // onClick = {() => onLogin({
-                    //     loginType: item.loginType,
-                    //     onSuccess: item.onSuccess,
-                    // })}
+                    onClick = {() => onLogin({
+                        loginType: item.loginType,
+                        onSuccess: item.onSuccess,
+                    })}
                     />
                 <div
                     style = {{ textAlign: 'center',
