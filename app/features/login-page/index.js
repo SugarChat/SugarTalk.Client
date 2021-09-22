@@ -19,7 +19,12 @@ const LogInRow = () =>
         {loginPlatformList.map(item =>
             (<LoginBtnWrapper key = { item.loginType }>
                 <LoginBtn
-                    backgroundImage = { item.imageSrc } />
+                    backgroundImage = { item.imageSrc } 
+                    // onClick = {() => onLogin({
+                    //     loginType: item.loginType,
+                    //     onSuccess: item.onSuccess,
+                    // })}
+                    />
                 <div
                     style = {{ textAlign: 'center',
                         marginTop: '0.4rem' }}>{item.loginType}</div>

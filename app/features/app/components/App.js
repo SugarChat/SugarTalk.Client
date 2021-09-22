@@ -12,6 +12,7 @@ import config from '../../config';
 import { history } from '../../router';
 import { createConferenceObjectFromURL } from '../../utils';
 import { Welcome } from '../../welcome';
+import loginPage from '../../login-page'
 
 /**
  * Main component encapsulating the entire application.

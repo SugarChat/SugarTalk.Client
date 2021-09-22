@@ -22,7 +22,8 @@ module.exports = {
         filename: '[name].js'
     },
     node: {
-        __dirname: true
+        __dirname: true,
+        fs: "empty"
     },
     module: {
         noParse: /external_api\\.js/,
