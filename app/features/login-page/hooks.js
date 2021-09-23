@@ -1,4 +1,5 @@
 import { googleAuthenticated } from "./login-service"
+import Api from "../../features/api/modules/login"
 
 export const useLoginLogic = () => {
     const onHandleError = () => {
@@ -14,7 +15,9 @@ export const useLoginLogic = () => {
         {
             loginType: 'Google',
             imageSrc: '../app/images/google.png',
-            onSuccess: async () => {}
+            onSuccess: async () => {
+                const {data, code} = await Api.sign()
+            }
         },
         {
             loginType: 'Facebook',

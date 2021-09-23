@@ -1,10 +1,8 @@
-import Url from 'url';
-import { getGoogleToken } from "../../features/api/modules/login"
+import Api from "../../features/api/modules/login"
 import Env from "../config/env"
-// import * as electron from 'electron';
 
 const getBrowserWindowInstance = () => {
-     return new electron.remote.BrowserWindow({
+     return new window.electron.remote.BrowserWindow({
       show: true,
       width: 375,
       height: 668,
@@ -24,31 +22,23 @@ export const googleAuthenticated = () => {
 
       authWindow.webContents.userAgent =
         'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0';
-  
+
       const scope = encodeURIComponent(
         'https://www.googleapis.com/auth/userinfo.email'
       );
   
-      const redirectUri = 'http://localhost:3000';
+      const redirectUrl = 'http://localhost:3000';
   
       authWindow.loadURL(
         `https://accounts.google.com/o/oauth2/v2/auth?client_id=${
           Env.googleClientId
         }&response_type=code&scope=${scope}&redirect_uri=${encodeURIComponent(
-          redirectUri
+          redirectUrl
         )}&include_granted_scopes=true&flowName=GeneralOAuthFlow`
       );
-
-      // let url =  `https://accounts.google.com/o/oauth2/v2/auth?client_id=${Env.googleClientId}&response_type=code&scope=${scope}&redirect_uri=${encodeURIComponent(
-      //     redirectUri
-      //   )}&include_granted_scopes=true&flowName=GeneralOAuthFlow`
-      // ;
-
-      // window.location.href = url
-
   
       authWindow.webContents.on('did-redirect-navigation', (_event, newUrl) => {
-        if (newUrl.includes(redirectUri)) {
+        if (newUrl.includes(redirectUrl)) {
           getGoogleCode(newUrl);
         }
       });
@@ -56,11 +46,11 @@ export const googleAuthenticated = () => {
       const getGoogleCode = async (url) => {
         try {
           if (url.indexOf('code') > -1) {
-            const qs = new Url.URL(url, redirectUri).searchParams;
+            const qs = new window.Url.URL(url, redirectUrl).searchParams;
             const code = qs.get('code');
-            getGoogleToken(code, redirectUri)
+            await Api.getGoogleToken(code, redirectUrl)
               .then((res) => {
-                resolve(res.accessToken);
+                resolve(res.data.accessToken);
               })
               .catch((error) => reject(error));
           }
@@ -69,7 +59,6 @@ export const googleAuthenticated = () => {
         } finally {
         }
       };
-
       authWindow.on('close', () => {
       });
     });
