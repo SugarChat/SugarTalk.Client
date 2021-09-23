@@ -5,7 +5,8 @@ import { AtlasKitThemeProvider } from '@atlaskit/theme';
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router';
 import { connect } from 'react-redux';
-import { ConnectedRouter as Router, push } from 'react-router-redux';
+import { push } from 'react-router-redux';
+import { ConnectedRouter as Router } from 'connected-react-router';
 
 import { Conference } from '../../conference';
 import config from '../../config';
@@ -96,11 +97,11 @@ class App extends Component<*> {
                 <Router history = { history }>
                     <Switch>
                         <Route
-                            component = { Welcome }
+                            component = { props => <Welcome { ...props } /> }
                             exact = { true }
                             path = '/' />
                         <Route
-                            component = { Conference }
+                            component = { props => <Conference { ...props } /> }
                             path = '/conference' />
                     </Switch>
                 </Router>
