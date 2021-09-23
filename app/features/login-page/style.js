@@ -1,4 +1,12 @@
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+const logoRotateAnimation = keyframes`
+0% { transform:rotate(0deg); opacity: 1 }
+25% { transform:rotate(-90deg); opacity: 0.5 }
+50% { transform:rotate(-180deg); opacity: 0.25 }
+75% { transform:rotate(-270deg); opacity: 0.5}
+100% { transform:rotate(-360deg); opacity: 1 }
+`;
 
 export const LoginPageWrapper = styled.div`
   padding: 0 1.25rem;
@@ -11,6 +19,7 @@ export const Logo = styled.div`
   border-radius: 50%;
   background-image: url('../app/images/logo.svg');
   background-size: cover;
+  animation: ${logoRotateAnimation} 4s linear infinite;
 `;
 
 export const LoginTitleWrapper = styled.div`
