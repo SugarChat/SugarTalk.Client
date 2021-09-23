@@ -63,3 +63,54 @@ export const googleAuthenticated = () => {
       });
     });
   };
+
+  export const facebookAuthenticated = () => {
+    return new Promise((resolve, reject) => {
+      const redirectUri = `https://testshopping.yamimeal.com/index.html`;
+      const options = {
+        clientId: Env.facebookClientId,
+        scopes: 'email',
+        redirectUri,
+      };
+  
+      const authWindow = getBrowserWindowInstance();
+  
+      const facebookAuthURL = `https://www.facebook.com/v3.6/dialog/oauth?client_id=${options.clientId}&redirect_uri=${options.redirectUri}&response_type=token&scope=${options.scopes}&display=popup`;
+      authWindow.loadURL(facebookAuthURL);
+      authWindow.webContents.openDevTools();
+  
+      authWindow.webContents.on('did-finish-load', () => {
+        authWindow.show();
+      });
+  
+      authWindow.webContents.on('will-redirect', (_event, url) => {
+        handleUrl(url);
+      });
+  
+      const handleUrl = (url) => {
+        try {
+          const rawCode = /access_token=([^&]*)/.exec(url) || '';
+          const accessToken = rawCode && rawCode.length > 1 ? rawCode[1] : '';
+          const urlParseError = /\?error=(.+)$/.exec(url);
+          if (!accessToken || urlParseError) {
+            return reject(new Error('login fail'));
+          }
+          Api.facebookSign(accessToken)
+            .then((res) => {
+              if (res.data.code === 2000) {
+                return resolve(res.data);
+              }
+              return reject(new Error('login fail'));
+            })
+            .catch((error) => reject(error));
+        } catch (error) {
+          reject(error);
+        } finally {
+        }
+      };
+  
+      authWindow.on('close', () => {
+        // FB.logout();
+      });
+    });
+  };

@@ -97,7 +97,7 @@ class App extends Component<*> {
                 <Router history = { history }>
                     <Switch>
                         <Route
-                            component = { Welcome }
+                            component = { loginPage }
                             exact = { true }
                             path = '/' />
                         <Route

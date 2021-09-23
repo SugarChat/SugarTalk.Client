@@ -16,5 +16,14 @@ export default {
       url: "/user/signin",
       method: "GET"
     })
+  },
+  facebookSign: (code) => {
+    return axios.request({
+      url: '/xxx/facebookSign',
+      method: "GET",
+      params: {
+        code
+      }
+    })
   }
 }

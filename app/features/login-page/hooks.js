@@ -1,4 +1,4 @@
-import { googleAuthenticated } from "./login-service"
+import { googleAuthenticated, facebookAuthenticated } from "./login-service"
 import Api from "../../features/api/modules/login"
 
 export const useLoginLogic = () => {
@@ -40,6 +40,11 @@ export const useLoginLogic = () => {
                 case 'Wechat': 
                     break
                 case 'Facebook':
+                    await facebookAuthenticated().then((result) =>{
+                        console.log(result);
+                    }).catch(() =>{
+                        // onHandleError()
+                    })
                     break
             }
         } catch (error) {
