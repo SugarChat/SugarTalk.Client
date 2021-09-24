@@ -11,7 +11,7 @@ const instance = axios.create({
 
 /** 请求拦截 */
 instance.interceptors.request.use((request) => {
-    request.headers.Authorization = `Bearer`
+    request.headers.Authorization = `Bearer ${localStorage.getItem("ACCESS_TOKEN")}`
     return request;
 },
 (error) =>{

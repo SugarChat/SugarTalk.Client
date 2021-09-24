@@ -1,5 +1,7 @@
 import { googleAuthenticated, facebookAuthenticated } from "./login-service"
 import Api from "../../features/api/modules/login"
+import store  from "../redux/store";
+import { push } from 'react-router-redux';
 
 export const useLoginLogic = () => {
     const onHandleError = () => {
@@ -16,7 +18,12 @@ export const useLoginLogic = () => {
             loginType: 'Google',
             imageSrc: '../app/images/google.png',
             onSuccess: async () => {
-                const {data, code} = await Api.sign()
+                const { data } = await Api.sign()
+                if(data.code === 20000) {
+                    localStorage.setItem("USER_INFO", JSON.stringify(data.data))
+                    store.dispatch({type: 'UPDATE_USER_INFO', userInfo: data.data})
+                    store.dispatch(push('/welcome'))
+                }
             }
         },
         {
@@ -31,6 +38,8 @@ export const useLoginLogic = () => {
             switch(loginType) {
                 case "Google":
                     await googleAuthenticated().then(({idToken}) =>{
+                        localStorage.setItem("ACCESS_TOKEN", idToken)
+                        store.dispatch({type: 'ACCESS_TOKEN', accessToken: idToken})
                         onSuccess()
                     }).catch((error) => {
                         console.log(error);

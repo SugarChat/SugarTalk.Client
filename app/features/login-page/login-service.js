@@ -57,6 +57,7 @@ export const googleAuthenticated = () => {
         } catch (e) {
           reject(e);
         } finally {
+          authWindow.close();
         }
       };
       authWindow.on('close', () => {
@@ -106,6 +107,7 @@ export const googleAuthenticated = () => {
         } catch (error) {
           reject(error);
         } finally {
+          authWindow.close();
         }
       };
   
