@@ -7,11 +7,13 @@ import { reducer as onboardingReducer } from '../onboarding';
 import { reducer as recentListReducer } from '../recent-list';
 import { reducer as routerReducer } from '../router';
 import { reducer as settingsReducer } from '../settings';
+import { connectRouter } from 'connected-react-router';
+import history from '../router/history';
 
 export default combineReducers({
     navbar: navbarReducer,
     onboarding: onboardingReducer,
     recentList: recentListReducer,
-    router: routerReducer,
+    router: connectRouter(history),
     settings: settingsReducer
 });
