@@ -42,13 +42,13 @@ export const useLoginLogic = () => {
                         store.dispatch({type: 'ACCESS_TOKEN', accessToken: idToken})
                         onSuccess()
                     }).catch((error) => {
-                        console.log(error);
                         // onHandleError()
                     })
                     break
                 case 'Wechat': 
                     break
                 case 'Facebook':
+                    return
                     await facebookAuthenticated().then((result) =>{
                         console.log(result);
                     }).catch(() =>{
@@ -57,7 +57,6 @@ export const useLoginLogic = () => {
                     break
             }
         } catch (error) {
-            console.log(error);
         }
     }
 
