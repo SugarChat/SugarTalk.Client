@@ -13,6 +13,7 @@ import config from '../../config';
 import { history } from '../../router';
 import { createConferenceObjectFromURL } from '../../utils';
 import { Welcome } from '../../welcome';
+import loginPage from "../../login-page"
 
 /**
  * Main component encapsulating the entire application.
@@ -91,18 +92,37 @@ class App extends Component<*> {
      * @inheritdoc
      * @returns {ReactElement}
      */
+
+    /**
+     * check is login
+     * @returns 
+     */
+    isLogin () {
+        return Boolean(localStorage.getItem("ACCESS_TOKEN"))
+    }
+    /**
+     * 
+     * @returns 
+     */
+    _renderIsLoginComponet = () => {
+        return this.isLogin() ? props => <Welcome { ...props } /> : loginPage
+    }
+
     render() {
         return (
             <AtlasKitThemeProvider mode = 'dark'>
                 <Router history = { history }>
                     <Switch>
                         <Route
-                            component = { props => <Welcome { ...props } /> }
+                            component = { this._renderIsLoginComponet() }
                             exact = { true }
                             path = '/' />
                         <Route
                             component = { props => <Conference { ...props } /> }
                             path = '/conference' />
+                        <Route
+                            component = { props => <Welcome { ...props } /> }
+                            path = '/welcome' />
                     </Switch>
                 </Router>
             </AtlasKitThemeProvider>

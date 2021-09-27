@@ -1,3 +1,4 @@
+const { ENOTEMPTY } = require('constants');
 const path = require('path');
 
 module.exports = {
@@ -9,7 +10,8 @@ module.exports = {
         filename: '[name].js'
     },
     node: {
-        __dirname: true
+        __dirname: true,
+        fs: "empty"
     },
     externals: [ {
         'jitsi-meet-electron-utils': 'require(\'jitsi-meet-electron-utils\')',

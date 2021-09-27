@@ -10,7 +10,7 @@ const protocolRegex = /^(https?|mailto):/i;
  * @param {string} link - The link (URL) that should be opened in the external browser.
  * @returns {void}
  */
-export function openExternalLink(link) {
+exports.openExternalLink = function (link) {
     let u;
 
     try {

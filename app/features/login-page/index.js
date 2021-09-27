@@ -1,7 +1,4 @@
 import React from 'react';
-import { compose } from 'redux';
-import { connect, useSelector } from 'react-redux';
-import { withTranslation } from 'react-i18next';
 import { Logo,
     LoginTitleWrapper,
     LoginTitle,
@@ -12,13 +9,21 @@ import { Logo,
     LoginBtnWrapper } from './style';
 import { useLoginLogic } from './hooks';
 
+
+
 export default function loginPage() {
-    const { loginPlatformList } = useLoginLogic();
+    const { loginPlatformList, onLogin} = useLoginLogic();
 
     const LogInRow = () =>
         (<LoginRowWrapper >
             {loginPlatformList.map(item =>
-                (<LoginBtnWrapper key = { item.loginType }>
+                (<LoginBtnWrapper key = { item.loginType } 
+                    onClick={()=> 
+                    onLogin({
+                        loginType: item.loginType,
+                        onSuccess: item.onSuccess
+                    })
+                }>
                     <LoginBtn
                         backgroundImage = { item.imageSrc } />
                     <div
