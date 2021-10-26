@@ -3,7 +3,7 @@ export * from './actionTypes'
 export * from './action'
 export * from './index'
 
-import { UPDATE_USER_INFO, ACCESS_TOKEN } from './actionTypes';
+import { UPDATE_USER_INFO, UPDATE_ACCESS_TOKEN } from './actionTypes';
 
 type State = {
     userInfo: typeof Object,
@@ -42,9 +42,9 @@ export default (state: State = DEFAULT_STATE, action: Object) => {
     case UPDATE_USER_INFO:
         return {
             ...state,
-            userInfo: action.updateUserInfo
+            userInfo: action.userInfo
         };
-    case ACCESS_TOKEN:
+    case UPDATE_ACCESS_TOKEN:
         return {
             ...state,
             accessToken: action.accessToken

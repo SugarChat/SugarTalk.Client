@@ -14,6 +14,7 @@ import { history } from '../../router';
 import { createConferenceObjectFromURL } from '../../utils';
 import { Welcome } from '../../welcome';
 import loginPage from '../../login-page';
+import { updateAccessToken, updateUserInfo } from '../../login-page/action';
 
 /**
  * Main component encapsulating the entire application.
@@ -44,6 +45,15 @@ class App extends Component<*> {
 
         // send notification to main process
         window.jitsiNodeAPI.ipc.send('renderer-ready');
+        try {
+            const accessToken = localStorage.getItem('ACCESS_TOKEN');
+            const userInfo = JSON.parse(localStorage.getItem('USER_INFO'));
+
+            if (accessToken && userInfo) {
+                this.props.dispatch(updateAccessToken(accessToken));
+                this.props.dispatch(updateUserInfo(userInfo));
+            }
+        } catch (e) {}
     }
 
     /**
