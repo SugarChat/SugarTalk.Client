@@ -120,6 +120,11 @@ class Welcome extends Component<Props, State> {
         this.props.dispatch(startOnboarding('welcome-page'));
 
         this._updateRoomname();
+        const currentWindow = window.electron.remote.getCurrentWindow();
+
+        currentWindow.setMinimumSize(800, 600);
+        currentWindow.setSize(800, 600);
+        currentWindow.setResizable(true);
     }
 
     /**
