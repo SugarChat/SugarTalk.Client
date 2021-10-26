@@ -14,7 +14,7 @@ import { compose } from 'redux';
 
 import { closeDrawer, DrawerContainer, Logo } from '../../navbar';
 import { Onboarding, advenaceSettingsSteps, startOnboarding } from '../../onboarding';
-import { Form, SettingsContainer, TogglesContainer } from '../styled';
+import { Form, SettingsContainer, TogglesContainer, SignOutButton } from '../styled';
 import {
     setEmail, setName, setWindowAlwaysOnTop,
     setStartWithAudioMuted, setStartWithVideoMuted, setDisableAGC
@@ -74,6 +74,7 @@ class SettingsDrawer extends Component<Props, *> {
         this._onEmailFormSubmit = this._onEmailFormSubmit.bind(this);
         this._onNameBlur = this._onNameBlur.bind(this);
         this._onNameFormSubmit = this._onNameFormSubmit.bind(this);
+        this._onClickSignOut = this._onClickSignOut.bind(this);
     }
 
     /**
@@ -170,6 +171,7 @@ class SettingsDrawer extends Component<Props, *> {
                             </TogglesContainer>
                         </Panel>
                         <Onboarding section = 'settings-drawer' />
+                        <SignOutButton onClick={this._onClickSignOut}>Sign Out</SignOutButton>
                     </SettingsContainer>
                 </DrawerContainer>
             </AkCustomDrawer>
@@ -244,6 +246,15 @@ class SettingsDrawer extends Component<Props, *> {
 
         // $FlowFixMe
         this.props.dispatch(setName(event.currentTarget.elements[0].value));
+    }
+
+    /**
+     * User sign out.
+     *
+     * @returns {void}
+     */
+    _onClickSignOut() {
+        console.log('SignOut');
     }
 }
 

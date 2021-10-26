@@ -10,8 +10,23 @@ type State = {
     accessToken: ''
 };
 
+const ThirdPartyFromType = {
+    google: 0,
+    wechat: 1,
+    facebook: 2
+};
+
+
 const DEFAULT_STATE = {
-    userInfo: Object,
+    userInfo: {
+        displayName: '',
+        email: '',
+        id: '',
+        picture: '',
+        thirdPartyFrom: ThirdPartyFromType.google,
+        thirdPartyId: ''
+    },
+
     accessToken: ''
 };
 
@@ -29,11 +44,11 @@ export default (state: State = DEFAULT_STATE, action: Object) => {
             ...state,
             userInfo: action.updateUserInfo
         };
-    case ACCESS_TOKEN: 
-    return {
-        ...state,
-        accessToken: action.accessToken
-    }
+    case ACCESS_TOKEN:
+        return {
+            ...state,
+            accessToken: action.accessToken
+        }
     default:
         return state;
     }

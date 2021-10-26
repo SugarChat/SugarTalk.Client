@@ -39,7 +39,7 @@ export const useLoginLogic = () => {
                 case "Google":
                     await googleAuthenticated().then(({idToken}) =>{
                         localStorage.setItem("ACCESS_TOKEN", idToken)
-                        store.dispatch({type: 'ACCESS_TOKEN', accessToken: idToken})
+                        store.dispatch({type: 'UPDATE_ACCESS_TOKEN', accessToken: idToken})
                         onSuccess()
                     }).catch((error) => {
                         // onHandleError()
