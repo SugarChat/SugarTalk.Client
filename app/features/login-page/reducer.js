@@ -4,16 +4,11 @@ export * from './action'
 export * from './index'
 
 import { UPDATE_USER_INFO, UPDATE_ACCESS_TOKEN } from './actionTypes';
+import { ThirdPartyFromType } from './type/types.js';
 
 type State = {
     userInfo: typeof Object,
     accessToken: ''
-};
-
-const ThirdPartyFromType = {
-    google: 0,
-    wechat: 1,
-    facebook: 2
 };
 
 

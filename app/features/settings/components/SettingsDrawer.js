@@ -11,6 +11,7 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
 import { closeDrawer, DrawerContainer, Logo } from '../../navbar';
 import { Onboarding, advenaceSettingsSteps, startOnboarding } from '../../onboarding';
@@ -23,7 +24,8 @@ import {
 import SettingToggle from './SettingToggle';
 import ServerURLField from './ServerURLField';
 import ServerTimeoutField from './ServerTimeoutField';
-
+import { updateAccessToken, updateUserInfo } from '../../login-page/action';
+import { ThirdPartyFromType } from '../../login-page/type/types.js';
 type Props = {
 
     /**
@@ -171,7 +173,7 @@ class SettingsDrawer extends Component<Props, *> {
                             </TogglesContainer>
                         </Panel>
                         <Onboarding section = 'settings-drawer' />
-                        <SignOutButton onClick={this._onClickSignOut}>Sign Out</SignOutButton>
+                        <SignOutButton onClick = { this._onClickSignOut }>Sign Out</SignOutButton>
                     </SettingsContainer>
                 </DrawerContainer>
             </AkCustomDrawer>
@@ -254,7 +256,18 @@ class SettingsDrawer extends Component<Props, *> {
      * @returns {void}
      */
     _onClickSignOut() {
-        console.log('SignOut');
+        localStorage.setItem('ACCESS_TOKEN', '');
+        localStorage.setItem('USER_INFO', '');
+        this.props.dispatch(updateAccessToken(''));
+        this.props.dispatch(updateUserInfo({
+            displayName: '',
+            email: '',
+            id: '',
+            picture: '',
+            thirdPartyFrom: ThirdPartyFromType.google,
+            thirdPartyId: ''
+        }));
+        this.props.dispatch(push('/'));
     }
 }
 
