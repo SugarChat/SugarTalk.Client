@@ -11,10 +11,11 @@ import { withTranslation } from 'react-i18next';
 import { connect } from 'react-redux';
 import type { Dispatch } from 'redux';
 import { compose } from 'redux';
+import { push } from 'react-router-redux';
 
 import { closeDrawer, DrawerContainer, Logo } from '../../navbar';
 import { Onboarding, advenaceSettingsSteps, startOnboarding } from '../../onboarding';
-import { Form, SettingsContainer, TogglesContainer } from '../styled';
+import { Form, SettingsContainer, TogglesContainer, SignOutButton } from '../styled';
 import {
     setEmail, setName, setWindowAlwaysOnTop,
     setStartWithAudioMuted, setStartWithVideoMuted, setDisableAGC
@@ -23,7 +24,9 @@ import {
 import SettingToggle from './SettingToggle';
 import ServerURLField from './ServerURLField';
 import ServerTimeoutField from './ServerTimeoutField';
-
+import { updateAccessToken, updateUserInfo } from '../../login-page/action';
+import { ThirdPartyFromType } from '../../login-page/type/types.js';
+import { openDrawer } from '../../navbar/actions.js';
 type Props = {
 
     /**
@@ -74,6 +77,7 @@ class SettingsDrawer extends Component<Props, *> {
         this._onEmailFormSubmit = this._onEmailFormSubmit.bind(this);
         this._onNameBlur = this._onNameBlur.bind(this);
         this._onNameFormSubmit = this._onNameFormSubmit.bind(this);
+        this._onClickSignOut = this._onClickSignOut.bind(this);
     }
 
     /**
@@ -170,6 +174,7 @@ class SettingsDrawer extends Component<Props, *> {
                             </TogglesContainer>
                         </Panel>
                         <Onboarding section = 'settings-drawer' />
+                        <SignOutButton onClick = { this._onClickSignOut }>Sign Out</SignOutButton>
                     </SettingsContainer>
                 </DrawerContainer>
             </AkCustomDrawer>
@@ -244,6 +249,27 @@ class SettingsDrawer extends Component<Props, *> {
 
         // $FlowFixMe
         this.props.dispatch(setName(event.currentTarget.elements[0].value));
+    }
+
+    /**
+     * User sign out.
+     *
+     * @returns {void}
+     */
+    _onClickSignOut() {
+        localStorage.setItem('ACCESS_TOKEN', '');
+        localStorage.setItem('USER_INFO', '');
+        this.props.dispatch(updateAccessToken(''));
+        this.props.dispatch(updateUserInfo({
+            displayName: '',
+            email: '',
+            id: '',
+            picture: '',
+            thirdPartyFrom: ThirdPartyFromType.google,
+            thirdPartyId: ''
+        }));
+        this.props.dispatch(openDrawer(undefined));
+        this.props.dispatch(push('/'));
     }
 }
 

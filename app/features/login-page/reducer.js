@@ -3,15 +3,25 @@ export * from './actionTypes'
 export * from './action'
 export * from './index'
 
-import { UPDATE_USER_INFO, ACCESS_TOKEN } from './actionTypes';
+import { UPDATE_USER_INFO, UPDATE_ACCESS_TOKEN } from './actionTypes';
+import { ThirdPartyFromType } from './type/types.js';
 
 type State = {
     userInfo: typeof Object,
     accessToken: ''
 };
 
+
 const DEFAULT_STATE = {
-    userInfo: Object,
+    userInfo: {
+        displayName: '',
+        email: '',
+        id: '',
+        picture: '',
+        thirdPartyFrom: ThirdPartyFromType.google,
+        thirdPartyId: ''
+    },
+
     accessToken: ''
 };
 
@@ -27,13 +37,13 @@ export default (state: State = DEFAULT_STATE, action: Object) => {
     case UPDATE_USER_INFO:
         return {
             ...state,
-            userInfo: action.updateUserInfo
+            userInfo: action.userInfo
         };
-    case ACCESS_TOKEN: 
-    return {
-        ...state,
-        accessToken: action.accessToken
-    }
+    case UPDATE_ACCESS_TOKEN:
+        return {
+            ...state,
+            accessToken: action.accessToken
+        }
     default:
         return state;
     }
