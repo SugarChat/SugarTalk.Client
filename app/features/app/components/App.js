@@ -109,7 +109,7 @@ class App extends Component<*> {
      * @returns
      */
     isLogin() {
-        return Boolean(localStorage.getItem('ACCESS_TOKEN'));
+        return Boolean(localStorage.getItem('ACCESS_TOKEN') && localStorage.getItem('USER_INFO'));
     }
 
     /**
