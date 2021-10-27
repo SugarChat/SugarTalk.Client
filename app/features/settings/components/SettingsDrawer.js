@@ -26,6 +26,7 @@ import ServerURLField from './ServerURLField';
 import ServerTimeoutField from './ServerTimeoutField';
 import { updateAccessToken, updateUserInfo } from '../../login-page/action';
 import { ThirdPartyFromType } from '../../login-page/type/types.js';
+import { openDrawer } from '../../navbar/actions.js';
 type Props = {
 
     /**
@@ -267,6 +268,7 @@ class SettingsDrawer extends Component<Props, *> {
             thirdPartyFrom: ThirdPartyFromType.google,
             thirdPartyId: ''
         }));
+        this.props.dispatch(openDrawer(undefined));
         this.props.dispatch(push('/'));
     }
 }
