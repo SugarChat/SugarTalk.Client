@@ -35,6 +35,7 @@ export const useLoginLogic = () => {
     ];
 
     const onLogin = async ({loginType, onSuccess}) => {
+        window.openLoading();
         try {
             switch(loginType) {
                 case "Google":
@@ -58,6 +59,8 @@ export const useLoginLogic = () => {
                     break
             }
         } catch (error) {
+        } finally {
+            window.closeLoading();
         }
     }
 
