@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <script type="text/javascript" src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+  </head>
+
+  <body>
+    <div id="login_container" style="width: 300px;height: 300px;"></div>
+  </body>
+  <script type="text/javascript">
+    new WxLogin({
+        self_redirect: true,
+        id:"login_container",
+        appid: "wx2f08ba2ae067656c",
+        redirect_uri: encodeURIComponent("https://testtalk.yamimeal.io/SugarTalk.Client/build/index.html"),
+        scope: "snsapi_userinfo",
+        state: "1",
+        style: "",//这个是二维码样式
+        href: ""
+  })
+  </script>
+</html>

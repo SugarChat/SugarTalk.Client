@@ -1,4 +1,4 @@
-import { googleAuthenticated, facebookAuthenticated } from "./login-service"
+import { googleAuthenticated, facebookAuthenticated, wechatAuthenticated } from "./login-service"
 import Api from "../../features/api/modules/login"
 import store  from "../redux/store";
 import { push } from 'react-router-redux';
@@ -46,6 +46,9 @@ export const useLoginLogic = () => {
                     })
                     break
                 case 'Wechat': 
+                await wechatAuthenticated().then(() => {
+
+                })
                     break
                 case 'Facebook':
                     return

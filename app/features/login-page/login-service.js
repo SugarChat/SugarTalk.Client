@@ -116,3 +116,11 @@ export const googleAuthenticated = () => {
       });
     });
   };
+
+  export const wechatAuthenticated = () => {
+    return new Promise((resolve, reject) => {
+      const pagePath =window.path.resolve(__dirname, './wechat.html')
+      const authWindow = getBrowserWindowInstance();
+      authWindow.loadFile(pagePath)
+    })
+  }

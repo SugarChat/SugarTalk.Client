@@ -10,6 +10,7 @@ const whitelistedIpcChannels = [ 'protocol-data-msg', 'renderer-ready' ];
 global.electron = require('electron');
 window.remote = require('electron').remote;
 window.Url = require('url')
+window.path = require('path')
 
 window.jitsiNodeAPI = {
     createElectronStorage,
