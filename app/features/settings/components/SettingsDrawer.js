@@ -269,7 +269,7 @@ class SettingsDrawer extends Component<Props, *> {
             thirdPartyId: ''
         }));
         this.props.dispatch(openDrawer(undefined));
-        this.props.dispatch(push('/'));
+        this.props.dispatch(push('/login'));
     }
 }
 

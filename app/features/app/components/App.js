@@ -133,6 +133,9 @@ class App extends Component<*> {
                         <Route
                             component = { props => <Welcome { ...props } /> }
                             path = '/welcome' />
+                        <Route
+                            component = { loginPage }
+                            path = '/login' />
                     </Switch>
                 </Router>
             </AtlasKitThemeProvider>
