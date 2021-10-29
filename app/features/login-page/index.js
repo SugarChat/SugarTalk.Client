@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Logo,
     LoginTitleWrapper,
     LoginTitle,
@@ -10,20 +10,28 @@ import { Logo,
 import { useLoginLogic } from './hooks';
 
 
-
 export default function loginPage() {
-    const { loginPlatformList, onLogin} = useLoginLogic();
+    const { loginPlatformList, onLogin } = useLoginLogic();
+
+    useEffect(() => {
+        const currentWindow = window.electron.remote.getCurrentWindow();
+
+        currentWindow.setMinimumSize(375, 668);
+        currentWindow.setSize(375, 668);
+        currentWindow.setResizable(false);
+    }, []);
 
     const LogInRow = () =>
         (<LoginRowWrapper >
             {loginPlatformList.map(item =>
-                (<LoginBtnWrapper key = { item.loginType } 
-                    onClick={()=> 
-                    onLogin({
-                        loginType: item.loginType,
-                        onSuccess: item.onSuccess
-                    })
-                }>
+                (<LoginBtnWrapper
+                    key = { item.loginType }
+                    onClick = { () =>
+                        onLogin({
+                            loginType: item.loginType,
+                            onSuccess: item.onSuccess
+                        })
+                    }>
                     <LoginBtn
                         backgroundImage = { item.imageSrc } />
                     <div

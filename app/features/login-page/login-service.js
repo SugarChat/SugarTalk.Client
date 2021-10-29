@@ -61,6 +61,7 @@ export const googleAuthenticated = () => {
         }
       };
       authWindow.on('close', () => {
+        window.closeLoading();
       });
     });
   };
