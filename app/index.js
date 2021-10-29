@@ -16,7 +16,8 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { App } from './features/app';
 import { persistor, store } from './features/redux';
 
-import Loading from './features/global-components/loading'
+import Loading from './features/global-components/loading';
+import MessageContainer from './features/global-components/message';
 
 import './i18n';
 
@@ -33,6 +34,7 @@ class Root extends Component<*> {
         return (
             <Provider store = { store }>
                 <Loading />
+                <MessageContainer />
                 <PersistGate
                     loading = { null }
                     persistor = { persistor }>

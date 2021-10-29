@@ -3,11 +3,19 @@ import Api from "../../features/api/modules/login"
 import store  from "../redux/store";
 import { push } from 'react-router-redux';
 import { updateUserInfo, updateAccessToken } from '../login-page/action';
+import { toast } from 'react-toastify';
 
 export const useLoginLogic = () => {
     const onHandleError = () => {
-        console.log('Login fail');
-      };
+        toast.error(
+            'Log in fail',
+            { 
+                containerId: 'default',
+                autoClose: 3000,
+                bodyStyle: { background: 'transparent' },
+                style: { background: '#1B2638', color: '#ccc' } }
+        );
+    };
 
     const loginPlatformList = [
         {
@@ -42,9 +50,9 @@ export const useLoginLogic = () => {
                     await googleAuthenticated().then(({idToken}) =>{
                         localStorage.setItem("ACCESS_TOKEN", idToken);
                         store.dispatch(updateAccessToken(idToken));
-                        onSuccess()
+                        onSuccess();
                     }).catch((error) => {
-                        // onHandleError()
+                        onHandleError();
                     })
                     break
                 case 'Wechat': 
