@@ -315,7 +315,7 @@ class Conference extends Component<Props, State> {
      * @returns {void}
      */
     _navigateToHome(event: Event, room: ?string, serverURL: ?string) {
-        this.props.dispatch(push('/', {
+        this.props.dispatch(push('/welcome', {
             error: event.type === 'error',
             room,
             serverURL
