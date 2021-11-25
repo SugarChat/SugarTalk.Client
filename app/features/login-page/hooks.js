@@ -4,6 +4,9 @@ import store  from "../redux/store";
 import { push } from 'react-router-redux';
 import { updateUserInfo, updateAccessToken } from '../login-page/action';
 import { toast } from 'react-toastify';
+import wechatImage from '../../images/wechat.png';
+import googleImage from '../../images/google.png';
+import facebookImage from '../../images/facebook.png';
 
 export const useLoginLogic = () => {
     const onHandleError = () => {
@@ -20,12 +23,12 @@ export const useLoginLogic = () => {
     const loginPlatformList = [
         {
             loginType: 'Wechat',
-            imageSrc: '../app/images/wechat.png',
+            imageSrc: wechatImage,
             onSuccess: () => {}
         },
         {
             loginType: 'Google',
-            imageSrc: '../app/images/google.png',
+            imageSrc: googleImage,
             onSuccess: async () => {
                 const { data } = await Api.sign()
                 if(data.code === 20000) {
@@ -37,7 +40,7 @@ export const useLoginLogic = () => {
         },
         {
             loginType: 'Facebook',
-            imageSrc: '../app/images/facebook.png',
+            imageSrc: facebookImage,
             onSuccess: () => {}
         }
     ];

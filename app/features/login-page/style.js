@@ -1,4 +1,5 @@
 import styled, { keyframes } from 'styled-components';
+import logo from '../../images/logo.png';
 
 const logoRotateAnimation = keyframes`
 0% { transform:rotate(0deg); opacity: 1 }
@@ -17,7 +18,7 @@ export const Logo = styled.div`
   height: 7rem;
   margin: 6.25rem auto 0 auto;
   border-radius: 50%;
-  background-image: url('../app/images/logo.svg');
+  background-image: url(${logo});
   background-size: cover;
   animation: ${logoRotateAnimation} 4s linear infinite;
 `;
