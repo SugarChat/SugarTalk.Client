@@ -218,7 +218,7 @@ function createJitsiMeetWindow() {
             contextIsolation: false,
             nativeWindowOpen: true,
             nodeIntegration: true,
-            preload: path.resolve(basePath, './app/preload/preload.js')
+            preload: path.resolve(basePath, isDev ? './app/preload/preload.js' : './build/preload.js')
         }
     };
 
